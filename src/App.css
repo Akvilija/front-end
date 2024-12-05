@@ -1,3 +1,24 @@
 *, *::before, *::after {
   box-sizing: border-box;
 }
+
+.inactive-link, .active-link {
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  text-decoration: none;
+}
+
+.active-link {
+  color: #FF7043;
+  border-bottom: 2px solid #FF7043;
+}
+
+.inactive-link {
+  color: #333;
+}
+
+.inactive-link:hover {
+  color: #FF7043;
+  border-bottom: 2px solid #FF7043;
+}
