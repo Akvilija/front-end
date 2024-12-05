@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../context/AppContext';
-import { Box, Typography, Container, CircularProgress, Button } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
+import ContainerComponent from '../../components/Container/Container';
+import Loading from '../../components/Loading/Loading';
 
 const SelectedProductPage = () => {
   const { productId } = useParams(); // Get product ID from route
@@ -29,7 +31,6 @@ const SelectedProductPage = () => {
     }
   };
 
-  // Handle product not found (e.g., after deletion)
   if (!product && !isDeleting) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
@@ -44,15 +45,11 @@ const SelectedProductPage = () => {
   }
 
   if (isDeleting) {
-    return (
-      <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
-        <CircularProgress />
-      </Box>
-    );
+    return <Loading />
   }
 
   return (
-    <Container maxWidth="md" sx={{ mt: 4 }}>
+    <ContainerComponent>
       <Box display="flex" flexDirection="column" alignItems="center" gap={4}>
         <Typography variant="h3" gutterBottom>{product.name}</Typography>
         <Box
@@ -78,9 +75,16 @@ const SelectedProductPage = () => {
           >
             {isDeleting ? 'Deleting...' : 'Delete'}
           </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => navigate(`/edit-product/${productId}`)} 
+          >
+            Edit
+          </Button>
         </Box>
       </Box>
-    </Container>
+    </ContainerComponent>
   );
 };
 

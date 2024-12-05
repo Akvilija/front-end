@@ -16,7 +16,6 @@ const Submenu = ({ subcategories, selectedSubcategory, onSubcategoryClick }) => 
       </Typography>
       <Divider sx={{ marginBottom: '10px' }} />
       <List>
-        {/* All Products Option */}
         <ListItem disablePadding>
           <ListItemButton
             selected={!selectedSubcategory}
@@ -32,7 +31,6 @@ const Submenu = ({ subcategories, selectedSubcategory, onSubcategoryClick }) => 
             <ListItemText primary="Visos prekės" />
           </ListItemButton>
         </ListItem>
-        {/* Render Subcategories */}
         {subcategories.map((subcategory) => (
           <ListItem key={subcategory._id} disablePadding>
             <ListItemButton

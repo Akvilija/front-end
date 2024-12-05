@@ -33,8 +33,15 @@ export const initialState = {
       case 'DELETE_PRODUCT':
         return {
           ...state,
-          products: state.products.filter((product) => product._id !== action.payload),
+          products: state.products.filter(product => product._id !== action.payload),
         };
+      case 'EDIT_PRODUCT':
+        return {
+          ...state,
+          products: state.products.map(product =>
+              product._id === action.payload._id ? action.payload : product
+          ),
+        }
       case 'SET_ERROR':
         return { ...state, error: action.payload, loading: false };
       default:

@@ -9,6 +9,8 @@ import {
   fetchProductsBySubcategoryId,
   addProduct,
   deleteProductById,
+  updateProductById,
+  fetchProductById
 } from '../api/fetchProducts/fetchProducts';
 
 const AppContext = createContext();
@@ -26,7 +28,7 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  const fetchCategoryData = async (categoryName) => {
+  const fetchCategoryData = async categoryName => {
     dispatch({ type: 'SET_LOADING' });
     try {
       const categories = await fetchCategories();
@@ -47,7 +49,7 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  const handleSubcategoryClick = async (subcategoryId) => {
+  const handleSubcategoryClick = async subcategoryId => {
     dispatch({ type: 'SET_LOADING' });
     try {
       if (subcategoryId) {
@@ -76,7 +78,26 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  const deleteProduct = async (productId) => {
+  const editProduct = async (productId, updatedData) => {
+    try {
+      const response = await updateProductById(productId, updatedData);
+
+      if (response.acknowledged && response.modifiedCount > 0) {
+        const updatedProduct = await fetchProductById(productId);
+  
+        dispatch({
+          type: 'EDIT_PRODUCT',
+          payload: updatedProduct,
+        });
+      } else {
+        console.warn("🚨 No changes made to the product or product not found.");
+      }
+    } catch (error) {
+      console.error('Failed to edit product:', error.message);
+    }
+  };
+
+  const deleteProduct = async productId => {
     try {
       await deleteProductById(productId);
       dispatch({
@@ -97,6 +118,7 @@ export const AppProvider = ({ children }) => {
         handleSubcategoryClick,
         addNewProduct,
         deleteProduct,
+        editProduct
       }}
     >
       {children}

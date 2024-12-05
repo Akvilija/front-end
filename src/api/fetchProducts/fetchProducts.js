@@ -60,3 +60,4 @@ export const deleteProductById = async (productId) => {
     throw error;
   }
 };
+

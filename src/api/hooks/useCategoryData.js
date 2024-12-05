@@ -6,14 +6,14 @@ export const useCategoryData = (categoryName) => {
   const [category, setCategory] = useState(null);
   const [subcategories, setSubcategories] = useState([]);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true); // Start loading
+      setLoading(true); 
       try {
         const categories = await fetchCategories();
-        const selectedCategory = categories.find((cat) => cat.name.toLowerCase() === categoryName.toLowerCase());
+        const selectedCategory = categories.find(cat => cat.name.toLowerCase() === categoryName.toLowerCase());
         setCategory(selectedCategory);
 
         if (selectedCategory) {
@@ -27,7 +27,7 @@ export const useCategoryData = (categoryName) => {
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
-        setLoading(false); // Stop loading
+        setLoading(false); 
       }
     };
 
@@ -36,15 +36,15 @@ export const useCategoryData = (categoryName) => {
 
   const handleSubcategoryClick = (subcategoryId) => {
     setSelectedSubcategory(subcategoryId);
-    setLoading(true); // Start loading
+    setLoading(true);
     if (subcategoryId) {
       const filteredProducts = products.filter((product) => product.subcategoryId === subcategoryId);
       setProducts(filteredProducts);
-      setLoading(false); // Stop loading
+      setLoading(false);
     } else if (category) {
       fetchProductsByCategoryId(category._id).then((data) => {
         setProducts(data);
-        setLoading(false); // Stop loading
+        setLoading(false); 
       });
     }
   };
