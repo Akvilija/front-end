@@ -11,12 +11,14 @@ export const fetchCategories = async () => {
   }
 };
 
-export const fetchSubcategories = async categoryId => {
+export const fetchSubcategories = async (categoryId = null) => {
   try {
-    const response = await axios.get(`${BASE_URL}/categories/${categoryId}/subcategories`);
-    return response.data
+    const response = await axios.get(`${BASE_URL}/subcategories`, {
+      params: categoryId ? { categoryId } : {}
+    });
+    return response.data;
   } catch (error) {
-    console.error(`Error fetching subcategories for category ${categoryId}`, error)
+    console.error('Error fetching subcategories:', error.message);
     throw error;
   }
-}
+};

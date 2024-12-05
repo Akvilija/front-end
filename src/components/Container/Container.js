@@ -5,13 +5,12 @@ const ContainerComponent = ({ children }) => {
         <Container 
             maxWidth="xxl"
             sx={{
-                minHeight: '90vh',
+                minHeight: '80vh',
                 display: 'flex', 
                 flexDirection: 'column', 
                 justifyContent: 'center', 
                 alignItems: 'center', 
                 padding: '20px', 
-                backgroundColor: '#FFF8E1',
               }}
             >
             {children}

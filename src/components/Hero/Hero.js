@@ -14,6 +14,7 @@ const HeroSection = () => {
             alignItems: "center",
             padding: '40px 20px',
             backgroundColor: '#FFF8E1',
+            borderRadius: '30px',
         }}>
       <Grid xs={12} md={6}>
         <Box sx={{ textAlign: 'left', padding: '20px' }}>
